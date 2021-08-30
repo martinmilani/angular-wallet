@@ -12,14 +12,14 @@ export class AppComponent {
 
   initialLocalStorage: User[] = [
     {
-      id: 'user1@mail.com12345',
+      id: 1,
       name: 'User 1',
       email: 'user1@mail.com',
       password: '12345',
       image: 'https://avatars.dicebear.com/api/human/user1.svg',
     },
     {
-      id: 'user2@mail.com12345',
+      id: 2,
       name: 'User 2',
       email: 'user2@mail.com',
       password: '12345',

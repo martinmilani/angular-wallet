@@ -10,7 +10,6 @@ import { SharedModule } from './components/shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UsersComponent } from './components/users/users.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginRegisterFormComponent } from './components/shared/login-register-form/login-register-form.component';
@@ -30,7 +29,6 @@ import { AuthGuard } from './auth/auth.guard';
     HeaderComponent,
     FooterComponent,
     UsersComponent,
-    DashboardComponent,
     LoginComponent,
     RegisterComponent,
     LoginComponent,
