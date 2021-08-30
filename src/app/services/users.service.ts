@@ -36,7 +36,7 @@ export class UsersService {
 
   storeUserOnLocalStorage(name: string, email: string, password: string) {
     let users: User[] = [];
-    let id = email + password;
+    let id = JSON.parse(localStorage.getItem('users') || '').length + 1;
 
     this.user.id = id;
     this.user.name = name;

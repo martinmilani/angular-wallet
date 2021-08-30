@@ -8,6 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { SnackBarService } from '../../services/snack-bar.service';
+import { Operation } from '../../models/operation.model';
+import { OperationsService } from '../../services/operations.service';
+import { UsersService } from '../../services/users.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-operations',
@@ -126,7 +130,9 @@ export class OperationsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public snackBarService: SnackBarService
+    public snackBarService: SnackBarService,
+    private usersService: UsersService,
+    private operationsService: OperationsService
   ) {
     this.form = this.formBuilder.group({
       amount: [
@@ -140,14 +146,26 @@ export class OperationsComponent implements OnInit {
       category: ['', [Validators.required, Validators.maxLength(20)]],
       date: ['', Validators.required],
       currency: ['ARS', Validators.required],
-      type: ['gastos', Validators.required],
+      type: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {}
 
   save(form: any, formDirective: FormGroupDirective): void {
-    console.log(this.form.value);
+    let currentUser = this.usersService.getCurrentUser();
+    let operation: Operation = {
+      userId: currentUser.id,
+      amount: this.form.value.amount,
+      category: this.form.value.category,
+      date: this.form.value.date,
+      currency: this.form.value.currency,
+      type: this.form.value.type,
+      account: 'pesos',
+    };
+
+    this.operationsService.addOperation(operation);
+
     formDirective.resetForm();
     this.form.reset();
     this.snackBarService.openSnackBar(
