@@ -8,15 +8,21 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
   users: User[] = [];
+  currentUser: any = {};
   user: any = {};
 
   constructor(private router: Router, public snackBarService: SnackBarService) {
-    this.users = JSON.parse(localStorage.getItem('users') || '');
+    /* this.users = JSON.parse(localStorage.getItem('users') || ''); */
   }
 
   getUsers() {
     this.users = JSON.parse(localStorage.getItem('users') || '');
     return this.users;
+  }
+
+  getCurrentUser() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return this.currentUser;
   }
 
   findUserByEmail(email: string) {
@@ -41,7 +47,11 @@ export class UsersService {
     users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push(this.user);
     localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
+    this.snackBarService.openSnackBar(
+      'Usuario creado exitosamente',
+      'green-snackbar'
+    );
+    this.router.navigate(['']);
   }
 
   addUser(name: string, email: string, password: string) {
@@ -49,13 +59,12 @@ export class UsersService {
       this.error();
     } else {
       this.storeUserOnLocalStorage(name, email, password);
-      this.router.navigate(['dashboard']);
     }
   }
 
   error() {
     this.snackBarService.openSnackBar(
-      'This mail is already in use!',
+      'El email ya ha sido registrado',
       'red-snackbar'
     );
   }

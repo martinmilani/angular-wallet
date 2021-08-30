@@ -15,6 +15,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.form-btn {
+  height: 60px;
+}
+
 .mat-simple-snackbar {
   justify-content: center !important;
 }
@@ -26,4 +30,24 @@ body {
     width: 100%;
     text-align: center;
   }
+}
+
+.green-snackbar {
+  color: lime;
+
+  a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.mat-menu-panel {
+  min-width: 180px !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  max-width: 100% !important;
+}
+.mat-menu-content {
+  display: flex !important;
+  flex-direction: column !important;
 }

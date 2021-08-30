@@ -3,8 +3,6 @@ import { User } from '../models/user.model';
 import { UsersService } from './users.service';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../services/snack-bar.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,25 +26,30 @@ export class AuthService {
     );
     if (findUser) {
       localStorage.setItem('currentUser', JSON.stringify(findUser));
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['operations']);
       console.log(findUser);
     } else {
       this.error();
     }
   }
 
-  get isLoggedIn(): Observable<boolean> {
+  get isLoggedIn() {
     if (localStorage.getItem('currentUser')) {
-      return of(true);
+      return true;
     } else {
-      return of(false);
+      return false;
     }
   }
 
   error() {
     this.snackBarService.openSnackBar(
-      'Invalid email or password!',
+      'Email o password incorrectos!',
       'red-snackbar'
     );
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['']);
   }
 }

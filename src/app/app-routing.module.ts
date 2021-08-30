@@ -5,22 +5,40 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './auth/auth.guard';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthenticatedLayoutComponent } from './components/shared/authenticated-layout/authenticated-layout.component';
+import { AnonymousLayoutComponent } from './components/shared/anonymous-layout/anonymous-layout.component';
+import { OperationsComponent } from './components/operations/operations.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: '',
+    component: AuthenticatedLayoutComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'users', component: UsersComponent },
+      { path: 'operations', component: OperationsComponent },
+      { path: 'dashboard', component: DashboardComponent },
+    ],
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/' },
+  {
+    path: '',
+    component: AnonymousLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

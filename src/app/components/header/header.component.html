@@ -1,26 +1,36 @@
-<nav
-  *ngIf="isLoggedIn | async"
-  class="navbar navbar-expand-lg navbar-light bg-light"
->
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Angular Wallet</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Pricing</a>
-      </div>
+<mat-toolbar>
+  <div class="custom-user-nav-contaier">
+    <div class="d-flex align-items-center justify-content-between">
+      <img class="navbar-img" src="{{ currentUser.image }}" alt="" />
+      <h5>{{ currentUser.name }}</h5>
     </div>
   </div>
-</nav>
+  <span class="example-spacer"></span>
+  <div class="menu-hide">
+    <button mat-button [routerLink]="['/operations/']">Operaciones</button>
+    <button mat-button>Balance</button>
+    <button mat-button>Movimientos</button>
+    <button mat-button>Usuarios</button>
+    <button mat-button>Plazo Fijo</button>
+    <button mat-button>Divisas</button>
+    <button mat-button color="accent" (click)="handleLogout()">Logout</button>
+  </div>
+
+  <button
+    mat-icon-button
+    class="example-icon hidden"
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-button [routerLink]="['/operations/']">Operaciones</button>
+    <button mat-button>Balance</button>
+    <button mat-button>Movimientos</button>
+    <button mat-button>Usuarios</button>
+    <button mat-button>Plazo Fijo</button>
+    <button mat-button>Divisas</button>
+    <button mat-button color="accent" (click)="handleLogout()">Logout</button>
+  </mat-menu>
+</mat-toolbar>

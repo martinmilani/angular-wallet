@@ -8,11 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  isLoggedIn: Observable<Boolean> | undefined;
-
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn;
-  }
+  ngOnInit(): void {}
 }

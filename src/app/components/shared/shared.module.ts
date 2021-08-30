@@ -27,10 +27,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
     MdbAccordionModule,
     MdbCarouselModule,
     MdbCheckboxModule,
@@ -55,6 +67,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
   ],
   exports: [
+    MatIconModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatToolbarModule,
     MdbAccordionModule,
     MdbCarouselModule,
     MdbCheckboxModule,

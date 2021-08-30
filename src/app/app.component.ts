@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './models/user.model';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent {
     },
   ];
 
-  constructor() {
+  constructor(private authService: AuthService) {
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify(this.initialLocalStorage));
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,19 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn: Observable<Boolean> | undefined;
+  currentUser: any = {};
+  isLoggedIn$: Observable<boolean> | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UsersService
+  ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  }
+
+  handleLogout() {
+    this.authService.logout();
   }
 }

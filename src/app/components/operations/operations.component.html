@@ -1,0 +1,75 @@
+<div
+  class="
+    container-fluid
+    h-100
+    d-flex
+    flex-column
+    justify-content-center
+    align-items-center
+  "
+>
+  <h1 class="mb-4">OPERACIONES</h1>
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="save(form, formDirective)"
+    class="d-flex flex-column mt-4 col-9 col-md-6 col-lg-3"
+  >
+    <mat-form-field appearance="fill" class="mb-3 w-100">
+      <mat-label>Monto</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="number"
+        min="0"
+        formControlName="amount"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mb-3 w-100">
+      <mat-label>Concepto</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="text"
+        formControlName="category"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mb-3 w-100">
+      <mat-label>Fecha</mat-label>
+      <input matInput type="date" formControlName="date" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mb-3 w-100">
+      <mat-label>Moneda</mat-label>
+      <mat-select formControlName="currency">
+        <mat-option
+          value="{{ currency.code }}"
+          *ngFor="let currency of CurrencyList"
+          >{{ currency.text }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-label class="mb-3">Tipo de operación</mat-label>
+    <mat-radio-group
+      class="mb-4 w-100"
+      aria-label="Select an option"
+      formControlName="type"
+    >
+      <mat-radio-button class="text-success" value="input"
+        >Ingresos</mat-radio-button
+      >
+      <mat-radio-button class="text-danger" value="output"
+        >Gastos</mat-radio-button
+      >
+    </mat-radio-group>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      class="mb-3 w-100 form-btn h5"
+      [disabled]="form.invalid"
+    >
+      boton
+    </button>
+  </form>
+</div>
