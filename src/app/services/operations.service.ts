@@ -7,12 +7,12 @@ import { Operation } from '../models/operation.model';
 })
 export class OperationsService {
   operations: Operation[] = [];
-  currentDate: Date = new Date();
-  formattedCurrentDate: string = '';
+  date: Date = new Date();
+  currentDate: string = '';
 
   constructor() {
-    this.formattedCurrentDate = formatDate(
-      this.currentDate,
+    this.currentDate = formatDate(
+      this.date,
       'yyyy-MM-dd',
       'en'
     );
@@ -30,7 +30,10 @@ export class OperationsService {
     }
     operations.push(operation);
     localStorage.setItem('operations', JSON.stringify(operations));
+  }
 
-    console.log(operation);
+  addTransfer(outputOperation:Operation, inputOperation:Operation){
+    this.addOperation(outputOperation)
+    this.addOperation(inputOperation)
   }
 }

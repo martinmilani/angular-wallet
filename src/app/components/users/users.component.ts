@@ -45,17 +45,28 @@ export class UsersComponent implements OnInit {
   }
 
   handleTransfer(form: any, formDirective: FormGroupDirective, id: number) {
-    let operationOut: Operation = {
+    const outputOperation: Operation = {
       userId: this.currentUser.id,
       amount: this.form.value.amount,
       category: 'Transferencia',
-      date: this.form.value.date,
-      currency: this.form.value.currency,
-      type: this.form.value.type,
+      date: this.operationsService.currentDate,
+      currency: 'ARS',
+      type:'output',
       account: 'pesos',
     };
 
-    console.log('Transferir a: ', id, '$ ', this.form.value.amount);
+    const inputOperation: Operation = {
+      userId: id,
+      amount: this.form.value.amount,
+      category: 'Transferencia',
+      date: this.operationsService.currentDate,
+      currency: 'ARS',
+      type: 'input',
+      account: 'pesos',
+    };
+
+    this.operationsService.addTransfer(outputOperation, inputOperation)
+
     formDirective.resetForm();
     this.form.reset();
     alert('Esta a punto de transferir');

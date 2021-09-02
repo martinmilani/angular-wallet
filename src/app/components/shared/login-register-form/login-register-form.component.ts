@@ -39,7 +39,6 @@ export class LoginRegisterFormComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    console.groupCollapsed(this.form);
     const email = this.form.value.email;
     const password = this.form.value.password;
     this.authService.auth(email, password);
