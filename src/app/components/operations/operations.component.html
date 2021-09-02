@@ -8,24 +8,44 @@
     align-items-center
   "
 >
-  <h1 class="mb-4">OPERACIONES</h1>
+  <h1 class="mt-4 mb-4">Operaciones</h1>
+
   <form
     [formGroup]="form"
     #formDirective="ngForm"
-    (ngSubmit)="save(form, formDirective)"
-    class="d-flex flex-column mt-4 col-9 col-md-6 col-lg-3"
+    (ngSubmit)="handleSave(form, formDirective)"
+    class="d-flex flex-column mt-4 mb-4 col-9 col-md-6 col-lg-3"
   >
-    <mat-form-field appearance="fill" class="mb-3 w-100">
+    <mat-form-field appearance="fill" class="mb-3 w-100" floatLabel="always">
       <mat-label>Monto</mat-label>
       <input
         matInput
-        autocomplete="off"
         type="number"
-        min="0"
         formControlName="amount"
+        placeholder="0"
+        class="text-end"
       />
+      <span class="pr-4" matPrefix>$&nbsp;</span>
+
+      <mat-error
+        *ngIf="this.form.controls.amount.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="this.form.controls.amount.errors.required">
+          Un monto es requerido
+        </div>
+        <div
+          *ngIf="
+            this.form.controls.amount.errors.min ||
+            this.form.controls.amount.errors.pattern
+          "
+        >
+          Solo números mayore que 0
+        </div>
+      </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mb-3 w-100">
+
+    <mat-form-field appearance="fill" class="mb-3 w-100" di>
       <mat-label>Concepto</mat-label>
       <input
         matInput
@@ -33,11 +53,29 @@
         type="text"
         formControlName="category"
       />
+      <mat-error
+        *ngIf="this.form.controls.category.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="this.form.controls.category.errors.required">
+          Un concepto es requerido
+        </div>
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill" class="mb-3 w-100">
       <mat-label>Fecha</mat-label>
       <input matInput type="date" formControlName="date" />
+      <mat-error
+        *ngIf="this.form.controls.date.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="this.form.controls.date.errors.required">
+          Una fecha es requerida
+        </div>
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill" class="mb-3 w-100">
       <mat-label>Moneda</mat-label>
       <mat-select formControlName="currency">
@@ -48,9 +86,10 @@
         >
       </mat-select>
     </mat-form-field>
+
     <mat-label class="mb-3">Tipo de operación</mat-label>
     <mat-radio-group
-      class="mb-4 w-100"
+      class="mb-5 w-100"
       aria-label="Select an option"
       formControlName="type"
     >
@@ -69,7 +108,7 @@
       class="mb-3 w-100 form-btn h5"
       [disabled]="form.invalid"
     >
-      boton
+      Guardar
     </button>
   </form>
 </div>

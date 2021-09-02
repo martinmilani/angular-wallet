@@ -1,5 +1,5 @@
 export interface Operation {
-  userId: string;
+  userId: number;
   amount: number;
   category: string;
   date: string;

@@ -1,3 +1,4 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Injectable, Type } from '@angular/core';
 import { Operation } from '../models/operation.model';
 
@@ -6,8 +7,16 @@ import { Operation } from '../models/operation.model';
 })
 export class OperationsService {
   operations: Operation[] = [];
+  currentDate: Date = new Date();
+  formattedCurrentDate: string = '';
 
-  constructor() {}
+  constructor() {
+    this.formattedCurrentDate = formatDate(
+      this.currentDate,
+      'yyyy-MM-dd',
+      'en'
+    );
+  }
 
   getOperations() {
     this.operations = JSON.parse(localStorage.getItem('operations') || '');

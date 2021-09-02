@@ -9,15 +9,22 @@ import { Router } from '@angular/router';
 export class UsersService {
   users: User[] = [];
   currentUser: any = {};
+  selectedUser: any = {};
   user: any = {};
 
   constructor(private router: Router, public snackBarService: SnackBarService) {
-    /* this.users = JSON.parse(localStorage.getItem('users') || ''); */
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
   }
 
   getUsers() {
     this.users = JSON.parse(localStorage.getItem('users') || '');
     return this.users;
+  }
+
+  getUserById(id: number) {
+    const users: User[] = this.getUsers();
+    this.selectedUser = users.find((u) => u.id == id);
+    return this.selectedUser;
   }
 
   getCurrentUser() {

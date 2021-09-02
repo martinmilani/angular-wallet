@@ -33,10 +33,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatDividerModule,
+    MatCardModule,
     MatSelectModule,
     MatRadioModule,
     MatCheckboxModule,
@@ -58,16 +65,17 @@ import { MatRadioModule } from '@angular/material/radio';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
   ],
   exports: [
     MatIconModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatCardModule,
     MatRadioModule,
     MatCheckboxModule,
     MatSelectModule,
@@ -94,7 +102,6 @@ import { MatRadioModule } from '@angular/material/radio';
     MatButtonModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
   ],
 })
 export class SharedModule {}

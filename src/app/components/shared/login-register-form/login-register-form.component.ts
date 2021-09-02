@@ -15,9 +15,8 @@ import { UsersService } from '../../../services/users.service';
   styleUrls: ['./login-register-form.component.scss'],
 })
 export class LoginRegisterFormComponent implements OnInit {
-  @Input() title: string = '';
-
   form: FormGroup;
+  @Input() title: string = '';
 
   //Toggle Validator for Name field
   formNameValidator: ValidatorFn = (c) => {
@@ -34,12 +33,13 @@ export class LoginRegisterFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', this.formNameValidator],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
   ngOnInit(): void {}
 
   login() {
+    console.groupCollapsed(this.form);
     const email = this.form.value.email;
     const password = this.form.value.password;
     this.authService.auth(email, password);

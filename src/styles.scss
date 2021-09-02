@@ -3,8 +3,19 @@
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
-
 @import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
+
+/* Chrome, Safari, Edge, Opera */
+input[matinput]::-webkit-outer-spin-button,
+input[matinput]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[matinput][type="number"] {
+  -moz-appearance: textfield;
+}
 
 html,
 body {
@@ -17,6 +28,10 @@ body {
 
 .form-btn {
   height: 60px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
 }
 
 .mat-simple-snackbar {
