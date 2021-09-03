@@ -36,10 +36,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatDialogModule,
     MatExpansionModule,
     BrowserAnimationsModule,
     MatDividerModule,
@@ -73,6 +75,7 @@ import { MatDividerModule } from '@angular/material/divider';
   ],
   exports: [
     MatIconModule,
+    MatDialogModule,
     MatExpansionModule,
     MatDividerModule,
     MatCardModule,

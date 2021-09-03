@@ -34,7 +34,7 @@
           <form
             [formGroup]="form"
             #formDirective="ngForm"
-            (ngSubmit)="handleTransfer(form, formDirective, user.id)"
+            (ngSubmit)="handleTransfer(form, formDirective, user.id, user.name)"
           >
             <mat-form-field appearance="outline" class="w-100 top-0">
               <mat-label>Monto</mat-label>

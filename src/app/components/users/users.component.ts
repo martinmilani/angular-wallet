@@ -9,6 +9,8 @@ import { OperationsService } from '../../services/operations.service';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { Operation } from '../../models/operation.model';
+import { MatDialog } from '@angular/material/dialog';
+import { TransferDialogComponent } from './components/transfer-dialog/transfer-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -21,6 +23,7 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
 
   constructor(
+    public dialog: MatDialog,
     public usersService: UsersService,
     private formBuilder: FormBuilder,
     private operationsService: OperationsService
@@ -44,14 +47,30 @@ export class UsersComponent implements OnInit {
     this.currentUser = this.usersService.currentUser;
   }
 
-  handleTransfer(form: any, formDirective: FormGroupDirective, id: number) {
+  /*  openDialog(name: string, amount: number) {
+    this.dialog.open(TransferDialogComponent, {
+      data: {
+        name: name,
+        amount: amount,
+      },
+    }).afterClosed().subscribe(result => {
+
+    });
+  } */
+
+  handleTransfer(
+    form: any,
+    formDirective: FormGroupDirective,
+    id: number,
+    name: string
+  ) {
     const outputOperation: Operation = {
       userId: this.currentUser.id,
       amount: this.form.value.amount,
       category: 'Transferencia',
       date: this.operationsService.currentDate,
       currency: 'ARS',
-      type:'output',
+      type: 'output',
       account: 'pesos',
     };
 
@@ -65,10 +84,21 @@ export class UsersComponent implements OnInit {
       account: 'pesos',
     };
 
-    this.operationsService.addTransfer(outputOperation, inputOperation)
+    this.dialog
+      .open(TransferDialogComponent, {
+        data: {
+          name: name,
+          amount: this.form.value.amount,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.operationsService.addTransfer(outputOperation, inputOperation);
+        }
+      });
 
     formDirective.resetForm();
     this.form.reset();
-    alert('Esta a punto de transferir');
   }
 }

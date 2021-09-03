@@ -27,7 +27,6 @@ export class AuthService {
     if (findUser) {
       localStorage.setItem('currentUser', JSON.stringify(findUser));
       this.router.navigate(['operations']);
-      console.log(findUser);
     } else {
       this.error();
     }

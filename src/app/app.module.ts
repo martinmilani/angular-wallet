@@ -22,6 +22,7 @@ import { UsersService } from './services/users.service';
 import { SnackBarService } from './services/snack-bar.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { TransferDialogComponent } from './components/users/components/transfer-dialog/transfer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthGuard } from './auth/auth.guard';
     AnonymousLayoutComponent,
     AuthenticatedLayoutComponent,
     OperationsComponent,
+    TransferDialogComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule],
   providers: [UsersService, SnackBarService, AuthService, AuthGuard],
