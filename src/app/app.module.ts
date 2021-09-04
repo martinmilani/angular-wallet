@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 //Modules
 import { SharedModule } from './components/shared/shared.module';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { CurrencyPipe } from '@angular/common';
 
 //Components
 import { HeaderComponent } from './components/header/header.component';
@@ -18,6 +19,7 @@ import { AnonymousLayoutComponent } from './components/shared/anonymous-layout/a
 import { AuthenticatedLayoutComponent } from './components/shared/authenticated-layout/authenticated-layout.component';
 import { OperationsComponent } from './components/operations/operations.component';
 import { TransferDialogComponent } from './components/users/components/transfer-dialog/transfer-dialog.component';
+import { MovementsComponent } from './components/movements/movements.component';
 
 //Services
 import { UsersService } from './services/users.service';
@@ -39,9 +41,16 @@ import { AuthGuard } from './auth/auth.guard';
     AuthenticatedLayoutComponent,
     OperationsComponent,
     TransferDialogComponent,
+    MovementsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, CurrencyMaskModule],
-  providers: [UsersService, SnackBarService, AuthService, AuthGuard],
+  providers: [
+    UsersService,
+    SnackBarService,
+    AuthService,
+    AuthGuard,
+    CurrencyPipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

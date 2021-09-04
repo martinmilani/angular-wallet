@@ -11,7 +11,7 @@ import { SnackBarService } from '../../services/snack-bar.service';
 import { Operation } from '../../models/operation.model';
 import { OperationsService } from '../../services/operations.service';
 import { UsersService } from '../../services/users.service';
-import { User } from 'src/app/models/user.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-operations',
@@ -76,18 +76,13 @@ export class OperationsComponent implements OnInit {
       date: this.form.value.date,
       currency: this.form.value.currency,
       type: this.form.value.type,
-      account: 'pesos',
+      account: this.form.value.account,
     };
 
-    console.log(this.form);
     this.operationsService.addOperation(operation);
 
     formDirective.resetForm();
     this.form.reset();
-    this.snackBarService.openSnackBar(
-      'La operación ha sido guardada!',
-      'green-snackbar'
-    );
   }
 
   getCurrency() {

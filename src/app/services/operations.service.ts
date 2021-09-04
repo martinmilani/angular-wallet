@@ -1,6 +1,7 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Injectable, Type } from '@angular/core';
 import { Operation } from '../models/operation.model';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,7 @@ export class OperationsService {
   currentDate: string = '';
 
   constructor() {
-    this.currentDate = formatDate(
-      this.date,
-      'yyyy-MM-dd',
-      'en'
-    );
+    this.currentDate = formatDate(this.date, 'yyyy-MM-dd', 'en');
   }
 
   getOperations() {
@@ -30,10 +27,16 @@ export class OperationsService {
     }
     operations.push(operation);
     localStorage.setItem('operations', JSON.stringify(operations));
+
+    Swal.fire({
+      icon: 'success',
+      text: 'La operacion ha sido guardada exitosamente!',
+      confirmButtonText: `Aceptar`,
+    });
   }
 
-  addTransfer(outputOperation:Operation, inputOperation:Operation){
-    this.addOperation(outputOperation)
-    this.addOperation(inputOperation)
+  addTransfer(outputOperation: Operation, inputOperation: Operation) {
+    this.addOperation(outputOperation);
+    this.addOperation(inputOperation);
   }
 }

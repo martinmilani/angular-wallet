@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { SnackBarService } from '../services/snack-bar.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,10 @@ export class UsersService {
 
   constructor(private router: Router, public snackBarService: SnackBarService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.users = JSON.parse(localStorage.getItem('users') || '');
   }
+
+  ngOnInit() {}
 
   getUsers() {
     this.users = JSON.parse(localStorage.getItem('users') || '');
@@ -54,10 +58,11 @@ export class UsersService {
     users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push(this.user);
     localStorage.setItem('users', JSON.stringify(users));
-    this.snackBarService.openSnackBar(
-      'Usuario creado exitosamente',
-      'green-snackbar'
-    );
+    Swal.fire({
+      icon: 'success',
+      text: 'Se ha registrado un nuevo usuario!',
+      confirmButtonText: `Aceptar`,
+    });
     this.router.navigate(['']);
   }
 
@@ -70,9 +75,11 @@ export class UsersService {
   }
 
   error() {
-    this.snackBarService.openSnackBar(
-      'El email ya ha sido registrado',
-      'red-snackbar'
-    );
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'El email ya ha sido registrado!',
+      confirmButtonText: `Aceptar`,
+    });
   }
 }

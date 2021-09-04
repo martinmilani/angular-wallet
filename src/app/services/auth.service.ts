@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import { UsersService } from './users.service';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../services/snack-bar.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -41,10 +42,12 @@ export class AuthService {
   }
 
   error() {
-    this.snackBarService.openSnackBar(
-      'Email o password incorrectos!',
-      'red-snackbar'
-    );
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'El email o password son incorrectos!',
+      confirmButtonText: `Aceptar`,
+    });
   }
 
   logout() {

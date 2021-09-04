@@ -10,7 +10,8 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { Operation } from '../../models/operation.model';
 import { MatDialog } from '@angular/material/dialog';
-import { TransferDialogComponent } from './components/transfer-dialog/transfer-dialog.component';
+import Swal from 'sweetalert2';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +34,8 @@ export class UsersComponent implements OnInit {
     public dialog: MatDialog,
     public usersService: UsersService,
     private formBuilder: FormBuilder,
-    private operationsService: OperationsService
+    private operationsService: OperationsService,
+    private currencyPipe: CurrencyPipe
   ) {
     this.form = this.formBuilder.group({
       amount: [
@@ -60,6 +62,9 @@ export class UsersComponent implements OnInit {
     id: number,
     name: string
   ) {
+    const formatedCurrency = this.currencyPipe.transform(
+      this.form.value.amount
+    );
     const outputOperation: Operation = {
       userId: this.currentUser.id,
       amount: this.form.value.amount,
@@ -80,19 +85,19 @@ export class UsersComponent implements OnInit {
       account: 'pesos',
     };
 
-    this.dialog
-      .open(TransferDialogComponent, {
-        data: {
-          name: name,
-          amount: this.form.value.amount,
-        },
-      })
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.operationsService.addTransfer(outputOperation, inputOperation);
-        }
-      });
+    Swal.fire({
+      title: 'Confirme la Transferencia',
+      text: `estas a punto de transferir a ${name} la cantidad de ARS ${formatedCurrency}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Transferir',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.operationsService.addTransfer(outputOperation, inputOperation);
+      }
+    });
 
     formDirective.resetForm();
     this.form.reset();

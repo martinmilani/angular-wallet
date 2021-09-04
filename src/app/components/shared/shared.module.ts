@@ -37,11 +37,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
+    MatTableModule,
     MatExpansionModule,
     BrowserAnimationsModule,
     MatDividerModule,
@@ -75,6 +77,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   exports: [
     MatIconModule,
+    MatTableModule,
     MatDialogModule,
     MatExpansionModule,
     MatDividerModule,
