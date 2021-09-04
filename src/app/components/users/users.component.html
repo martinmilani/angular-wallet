@@ -40,7 +40,9 @@
               <mat-label>Monto</mat-label>
               <input
                 matInput
-                type="number"
+                currencyMask
+                [(ngModel)]="this.form.value.amount"
+                [options]="this.ARS"
                 formControlName="amount"
                 placeholder="0"
                 class="text-end"

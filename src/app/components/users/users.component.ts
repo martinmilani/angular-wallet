@@ -22,6 +22,13 @@ export class UsersComponent implements OnInit {
   currentUser: any;
   form: FormGroup;
 
+  ARS = {
+    prefix: 'ARS $: ',
+    thousands: '.',
+    decimal: ',',
+    precision: 2,
+  };
+
   constructor(
     public dialog: MatDialog,
     public usersService: UsersService,
@@ -46,17 +53,6 @@ export class UsersComponent implements OnInit {
     this.users = this.usersService.getUsers();
     this.currentUser = this.usersService.currentUser;
   }
-
-  /*  openDialog(name: string, amount: number) {
-    this.dialog.open(TransferDialogComponent, {
-      data: {
-        name: name,
-        amount: amount,
-      },
-    }).afterClosed().subscribe(result => {
-
-    });
-  } */
 
   handleTransfer(
     form: any,

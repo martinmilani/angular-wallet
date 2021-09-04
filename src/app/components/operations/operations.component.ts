@@ -22,6 +22,20 @@ export class OperationsComponent implements OnInit {
   form: FormGroup;
   currentUser: User;
 
+  ARS = {
+    prefix: 'ARS $: ',
+    thousands: '.',
+    decimal: ',',
+    precision: 2,
+  };
+
+  USD = {
+    prefix: 'USD $: ',
+    thousands: ',',
+    decimal: '.',
+    precision: 2,
+  };
+
   CurrencyList: DropDownList[] = [
     { code: 'ARS', text: 'Argentina Pesos – ARS' },
     { code: 'USD', text: 'United States Dollars – USD' },
@@ -36,7 +50,7 @@ export class OperationsComponent implements OnInit {
     this.currentUser = this.usersService.currentUser;
     this.form = this.formBuilder.group({
       amount: [
-        '',
+        { value: '' },
         [
           Validators.required,
           Validators.min(1),
@@ -65,6 +79,7 @@ export class OperationsComponent implements OnInit {
       account: 'pesos',
     };
 
+    console.log(this.form);
     this.operationsService.addOperation(operation);
 
     formDirective.resetForm();
@@ -73,5 +88,14 @@ export class OperationsComponent implements OnInit {
       'La operación ha sido guardada!',
       'green-snackbar'
     );
+  }
+
+  getCurrency() {
+    console.log(this.form.value.currency);
+    if (this.form.value.currency == 'ARS') {
+      return this.ARS;
+    } else {
+      return this.USD;
+    }
   }
 }

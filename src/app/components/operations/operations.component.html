@@ -20,12 +20,14 @@
       <mat-label>Monto</mat-label>
       <input
         matInput
-        type="number"
+        currencyMask
+        [(ngModel)]="this.form.value.amount"
+        [options]="getCurrency()"
+        maxDigits="9"
         formControlName="amount"
         placeholder="0"
         class="text-end"
       />
-      <span class="pr-4" matPrefix>$&nbsp;</span>
 
       <mat-error
         *ngIf="this.form.controls.amount.errors"
