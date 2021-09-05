@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'operations', component: OperationsComponent },
       { path: 'movements', component: MovementsComponent },
+      { path: '**', redirectTo: '/operations', pathMatch: 'full' },
     ],
   },
   {
