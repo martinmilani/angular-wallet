@@ -5,11 +5,11 @@
     <mat-card-content class="d-flex justify-content-around">
       <div class="text-danger">
         <h5>Compra</h5>
-        <h5>$ {{ this.prices[0].casa.compra }}</h5>
+        <h5>$ {{ this.prices && this.prices[0].casa.compra }}</h5>
       </div>
       <div class="text-success">
         <h5>Venta</h5>
-        <h5>$ {{ this.prices[0].casa.venta }}</h5>
+        <h5>$ {{ this.prices && this.prices[0].casa.venta }}</h5>
       </div>
     </mat-card-content>
   </mat-card>
