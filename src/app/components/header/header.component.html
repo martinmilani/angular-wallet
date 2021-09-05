@@ -8,10 +8,10 @@
   <span class="example-spacer"></span>
   <div class="menu-hide">
     <button mat-button [routerLink]="['/operations/']">Operaciones</button>
-    <button mat-button>Balance</button>
+    <button mat-button [routerLink]="['/balance/']">Balance</button>
     <button mat-button [routerLink]="['/movements/']">Movimientos</button>
     <button mat-button [routerLink]="['/users/']">Usuarios</button>
-    <button mat-button>Plazo Fijo</button>
+    <button mat-button disabled>Plazo Fijo</button>
     <button mat-button>Divisas</button>
     <button mat-button color="accent" (click)="handleLogout()">Logout</button>
   </div>
@@ -26,10 +26,10 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-button [routerLink]="['/operations/']">Operaciones</button>
-    <button mat-button>Balance</button>
+    <button mat-button [routerLink]="['/balance/']">Balance</button>
     <button mat-button [routerLink]="['/movements/']">Movimientos</button>
     <button mat-button [routerLink]="['/users/']">Usuarios</button>
-    <button mat-button>Plazo Fijo</button>
+    <button mat-button disabled>Plazo Fijo</button>
     <button mat-button>Divisas</button>
     <button mat-button color="accent" (click)="handleLogout()">Logout</button>
   </mat-menu>

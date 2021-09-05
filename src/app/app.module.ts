@@ -28,6 +28,7 @@ import { UsersService } from './services/users.service';
 import { SnackBarService } from './services/snack-bar.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { BalanceComponent } from './components/balance/balance.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AuthGuard } from './auth/auth.guard';
     AuthenticatedLayoutComponent,
     OperationsComponent,
     MovementsComponent,
+    BalanceComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, CurrencyMaskModule],
   providers: [
