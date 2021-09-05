@@ -70,7 +70,7 @@ export class OperationsComponent implements OnInit {
 
   handleSave(form: any, formDirective: FormGroupDirective): void {
     /*  console.log(this.form.value); */
-    let id = this.operationsService.getOperationsId();
+    let id = this.operationsService.getLastOperationsId();
     let operation: Operation = {
       id: id,
       userId: this.currentUser.id,

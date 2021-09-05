@@ -66,7 +66,7 @@ export class UsersComponent implements OnInit {
       this.form.value.amount,
       'ARS'
     );
-    let operationsId = this.operationsService.getOperationsId();
+    let operationsId = this.operationsService.getLastOperationsId();
     const expenseOperation: Operation = {
       id: operationsId,
       userId: this.currentUser.id,

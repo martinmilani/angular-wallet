@@ -1,1 +1,42 @@
-<p>balance works!</p>
+<div
+  class="container-fluid min-vh-100 d-flex flex-column align-items-center my-4"
+>
+  <div
+    class="
+      mt-5
+      d-flex
+      flex-column
+      justify-content-around
+      col-10 col-md-7 col-lg-4
+    "
+  >
+    <mat-card class="w-100 d-flex flex-column align-items-center my-4">
+      <mat-card-title> Balance Cta. Pesos </mat-card-title>
+      <mat-card-subtitle class="text-success"
+        >Total Ingresos:
+        {{ totalIncomeARS | currency: "ARS":true }}</mat-card-subtitle
+      >
+      <mat-card-subtitle class="text-danger"
+        >Total Gastos:
+        {{ totalExpenseARS | currency: "ARS":true }}</mat-card-subtitle
+      >
+      <mat-card-content
+        ><h5>Total: {{ totalARS | currency: "ARS":true }}</h5>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="w-100 d-flex flex-column align-items-center my-4">
+      <mat-card-title> Balance Cta. Dolares </mat-card-title>
+      <mat-card-subtitle class="text-success"
+        >Total Ingresos:
+        {{ totalIncomeUSD | currency: "USD":true }}</mat-card-subtitle
+      >
+      <mat-card-subtitle class="text-danger"
+        >Total Gastos:
+        {{ totalExpenseUSD | currency: "USD":true }}</mat-card-subtitle
+      >
+      <mat-card-content
+        ><h5>Total: {{ totalUSD | currency: "USD":true }}</h5>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

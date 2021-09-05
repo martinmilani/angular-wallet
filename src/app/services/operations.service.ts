@@ -33,7 +33,7 @@ export class OperationsService {
     return operations;
   }
 
-  getOperationsId() {
+  getLastOperationsId() {
     let id = JSON.parse(localStorage.getItem('operations') || '[]').length + 1;
     return id;
   }
@@ -66,5 +66,20 @@ export class OperationsService {
       }
       localStorage.setItem('operations', JSON.stringify(editedOperations));
     });
+  }
+
+  getTotals(userId: number, currency: string, type: string) {
+    let op = JSON.parse(localStorage.getItem('operations') || '[]')
+      .filter((item: Operation) => item.userId === userId)
+      .filter((item: Operation) => item.currency === currency)
+      .filter((item: Operation) => item.type === type);
+    if (op.length === 0) {
+      return 0;
+    } else {
+      let sum = op.reduce((a: any, b: any) => ({
+        amount: a.amount + b.amount,
+      }));
+      return sum.amount;
+    }
   }
 }
