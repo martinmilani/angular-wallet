@@ -10,6 +10,7 @@ import { AuthenticatedLayoutComponent } from './components/shared/authenticated-
 import { AnonymousLayoutComponent } from './components/shared/anonymous-layout/anonymous-layout.component';
 import { OperationsComponent } from './components/operations/operations.component';
 import { MovementsComponent } from './components/movements/movements.component';
+import { BalanceComponent } from './components/balance/balance.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'operations', component: OperationsComponent },
       { path: 'movements', component: MovementsComponent },
+      { path: 'balance', component: BalanceComponent },
       { path: '**', redirectTo: '/operations', pathMatch: 'full' },
     ],
   },
