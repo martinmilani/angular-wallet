@@ -10,6 +10,7 @@ registerLocaleData(localeAr);
 import { SharedModule } from './components/shared/shared.module';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CurrencyPipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 //Components
 import { HeaderComponent } from './components/header/header.component';
@@ -50,7 +51,13 @@ import { AuthGuard } from './auth/auth.guard';
     ExchangeComponent,
     ExchangeRateComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, CurrencyMaskModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    CurrencyMaskModule,
+    HttpClientModule,
+  ],
   providers: [
     UsersService,
     SnackBarService,

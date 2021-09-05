@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DropDownList } from '../../models/currency.model';
-import { ExchangeRateComponent } from './components/exchange-rate/exchange-rate.component';
+
 import {
   Form,
   FormBuilder,
@@ -14,6 +14,7 @@ import { User } from '../../models/user.model';
 
 import { OperationsService } from '../../services/operations.service';
 import { UsersService } from '../../services/users.service';
+import { ExchangeService } from '../../services/exchange.service';
 
 @Component({
   templateUrl: './exchange.component.html',
@@ -23,8 +24,7 @@ export class ExchangeComponent implements OnInit {
   form: FormGroup;
   currentUser: User;
 
-  dolarCompra: number = 97.33;
-  dolarVenta: number = 103.33;
+  prices: any;
 
   ARS = {
     prefix: 'ARS $: ',
@@ -46,6 +46,7 @@ export class ExchangeComponent implements OnInit {
   ];
 
   constructor(
+    private exchangeService: ExchangeService,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
     private operationsService: OperationsService
@@ -67,9 +68,17 @@ export class ExchangeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.exchangeService
+      .getPrices()
+      .subscribe((prices) => (this.prices = prices));
+  }
 
   getAmounts() {
+    let dolarCompra = parseFloat(this.prices[0].casa.compra.replace(',', '.'));
+    let dolarVenta = parseFloat(this.prices[0].casa.venta.replace(',', '.'));
+    console.log('compra: ', dolarCompra, typeof dolarCompra);
+    console.log('venta: ', dolarVenta, typeof dolarVenta);
     let amounts = { ars: 0, usd: 0 };
     let operationType = this.form.value.type;
     let operationCurrency = this.form.value.currency;
@@ -78,11 +87,11 @@ export class ExchangeComponent implements OnInit {
       amounts.ars = operationAmount;
       amounts.usd =
         operationAmount /
-        (operationType == 'EXPENSE' ? this.dolarVenta : this.dolarCompra);
+        (operationType == 'EXPENSE' ? dolarVenta : dolarCompra);
     } else {
       amounts.ars =
         operationAmount *
-        (operationType == 'EXPENSE' ? this.dolarVenta : this.dolarCompra);
+        (operationType == 'EXPENSE' ? dolarVenta : dolarCompra);
 
       amounts.usd = operationAmount;
     }
@@ -129,8 +138,8 @@ export class ExchangeComponent implements OnInit {
       type: accountTypes.usd,
     };
 
-    this.operationsService.addTransfer(arsOperation, usdOperation);
-    /* console.log(arsOperation, usdOperation); */
+    /* this.operationsService.addTransfer(arsOperation, usdOperation); */
+    console.log(arsOperation, usdOperation);
 
     formDirective.resetForm();
     this.form.reset();

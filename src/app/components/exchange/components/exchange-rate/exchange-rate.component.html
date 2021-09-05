@@ -1,15 +1,15 @@
 <div class="container-fluid d-flex justify-content-center vw-100">
-  <mat-card class="text-center col-10">
+  <mat-card class="text-center col-10 col-lg-4">
     <mat-card-title>Tipo de Cambio</mat-card-title>
     <mat-card-subtitle>Dolar Oficial</mat-card-subtitle>
     <mat-card-content class="d-flex justify-content-around">
       <div class="text-danger">
-        <p>Compra</p>
-        <p>$ 97,33</p>
+        <h5>Compra</h5>
+        <h5>$ {{ this.prices[0].casa.compra }}</h5>
       </div>
       <div class="text-success">
-        <p>Venta</p>
-        <p>$ 103,33</p>
+        <h5>Venta</h5>
+        <h5>$ {{ this.prices[0].casa.venta }}</h5>
       </div>
     </mat-card-content>
   </mat-card>
