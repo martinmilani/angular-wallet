@@ -7,7 +7,6 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { SnackBarService } from '../../services/snack-bar.service';
 import { Operation } from '../../models/operation.model';
 import { OperationsService } from '../../services/operations.service';
 import { UsersService } from '../../services/users.service';
@@ -43,7 +42,6 @@ export class OperationsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public snackBarService: SnackBarService,
     private usersService: UsersService,
     private operationsService: OperationsService
   ) {

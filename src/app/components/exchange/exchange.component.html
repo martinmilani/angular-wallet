@@ -1,0 +1,82 @@
+<div
+  class="container-fluid min-vh-100 d-flex flex-column align-items-center my-4"
+>
+  <h1 class="mb-4">Compra/Venta Dolares</h1>
+
+  <app-exchange-rate></app-exchange-rate>
+
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="handleSave(form, formDirective)"
+    class="col-10 col-lg-4 mt-4 mb-4 d-flex flex-column"
+  >
+    <mat-radio-group
+      class="mb-5 w-100 d-flex flex-column justify-content-center"
+      formControlName="type"
+      aria-label="Select an option"
+    >
+      <mat-label class="mb-4 w-100 text-center">Tipo de operación</mat-label>
+      <div class="d-flex justify-content-evenly">
+        <mat-radio-button class="text-danger" value="EXPENSE"
+          >Compra</mat-radio-button
+        >
+        <mat-radio-button class="text-success" value="INCOME"
+          >Venta</mat-radio-button
+        >
+      </div>
+    </mat-radio-group>
+
+    <mat-form-field appearance="fill" class="mb-3 w-100" floatLabel="always">
+      <mat-label>Monto</mat-label>
+      <input
+        matInput
+        currencyMask
+        [(ngModel)]="this.form.value.amount"
+        [options]="getCurrency()"
+        maxDigits="9"
+        formControlName="amount"
+        placeholder="0"
+        class="text-end"
+      />
+
+      <mat-error
+        *ngIf="this.form.controls.amount.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="this.form.controls.amount.errors.required">
+          Un monto es requerido
+        </div>
+        <div
+          *ngIf="
+            this.form.controls.amount.errors.min ||
+            this.form.controls.amount.errors.pattern
+          "
+        >
+          Solo números mayore que 0
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="mb-3 w-100">
+      <mat-label>Moneda</mat-label>
+      <mat-select formControlName="currency">
+        <mat-option
+          value="{{ currency.code }}"
+          *ngFor="let currency of CurrencyList"
+          >{{ currency.text }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      class="mb-3 w-100 form-btn h5"
+      [disabled]="form.invalid"
+    >
+      Aceptar
+    </button>
+  </form>
+</div>

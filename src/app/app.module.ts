@@ -22,13 +22,15 @@ import { AnonymousLayoutComponent } from './components/shared/anonymous-layout/a
 import { AuthenticatedLayoutComponent } from './components/shared/authenticated-layout/authenticated-layout.component';
 import { OperationsComponent } from './components/operations/operations.component';
 import { MovementsComponent } from './components/movements/movements.component';
+import { BalanceComponent } from './components/balance/balance.component';
+import { ExchangeComponent } from './components/exchange/exchange.component';
+import { ExchangeRateComponent } from './components/exchange/components/exchange-rate/exchange-rate.component';
 
 //Services
 import { UsersService } from './services/users.service';
 import { SnackBarService } from './services/snack-bar.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/auth.guard';
-import { BalanceComponent } from './components/balance/balance.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { BalanceComponent } from './components/balance/balance.component';
     OperationsComponent,
     MovementsComponent,
     BalanceComponent,
+    ExchangeComponent,
+    ExchangeRateComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, CurrencyMaskModule],
   providers: [
