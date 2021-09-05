@@ -2,6 +2,8 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Injectable, Type } from '@angular/core';
 import { Operation } from '../models/operation.model';
 import Swal from 'sweetalert2';
+import { Observable, of } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +17,25 @@ export class OperationsService {
     this.currentDate = formatDate(this.date, 'yyyy-MM-dd', 'en');
   }
 
-  getOperations() {
-    this.operations = JSON.parse(localStorage.getItem('operations') || '');
-    return this.operations;
+  getOperations(): Observable<Operation[]> {
+    const operations = of(
+      JSON.parse(localStorage.getItem('operations') || '[]')
+    );
+    return operations;
+  }
+
+  getOperationsByUserId(userId: number): Observable<Operation[]> {
+    const operations = of(
+      JSON.parse(localStorage.getItem('operations') || '[]').filter(
+        (item: Operation) => item.userId === userId
+      )
+    );
+    return operations;
+  }
+
+  getOperationsId() {
+    let id = JSON.parse(localStorage.getItem('operations') || '[]').length + 1;
+    return id;
   }
 
   addOperation(operation: Operation) {
@@ -35,8 +53,18 @@ export class OperationsService {
     });
   }
 
-  addTransfer(outputOperation: Operation, inputOperation: Operation) {
-    this.addOperation(outputOperation);
-    this.addOperation(inputOperation);
+  addTransfer(expenseOperation: Operation, incomeOperation: Operation) {
+    this.addOperation(expenseOperation);
+    this.addOperation(incomeOperation);
+  }
+
+  editCategory(operation: Operation) {
+    let editedOperations = this.operations;
+    this.operations.find((o, i) => {
+      if (o.id === operation.id) {
+        editedOperations[i] = operation;
+      }
+      localStorage.setItem('operations', JSON.stringify(editedOperations));
+    });
   }
 }

@@ -53,41 +53,43 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.usersService.getUsers();
-    this.currentUser = this.usersService.currentUser;
+    this.currentUser = this.usersService.getCurrentUser();
   }
 
   handleTransfer(
     form: any,
     formDirective: FormGroupDirective,
-    id: number,
-    name: string
+    userId: number,
+    userName: string
   ) {
     const formatedCurrency = this.currencyPipe.transform(
-      this.form.value.amount
+      this.form.value.amount,
+      'ARS'
     );
-    const outputOperation: Operation = {
+    let operationsId = this.operationsService.getOperationsId();
+    const expenseOperation: Operation = {
+      id: operationsId,
       userId: this.currentUser.id,
       amount: this.form.value.amount,
       category: 'Transferencia',
       date: this.operationsService.currentDate,
       currency: 'ARS',
-      type: 'output',
-      account: 'pesos',
+      type: 'EXPENSE',
     };
 
-    const inputOperation: Operation = {
-      userId: id,
+    const incomeOperation: Operation = {
+      id: operationsId + 1,
+      userId: userId,
       amount: this.form.value.amount,
       category: 'Transferencia',
       date: this.operationsService.currentDate,
       currency: 'ARS',
-      type: 'input',
-      account: 'pesos',
+      type: 'INCOME',
     };
 
     Swal.fire({
       title: 'Confirme la Transferencia',
-      text: `estas a punto de transferir a ${name} la cantidad de ARS ${formatedCurrency}`,
+      text: `Estas a punto de transferir a ${userName} la cantidad de ARS ${formatedCurrency}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -95,7 +97,7 @@ export class UsersComponent implements OnInit {
       confirmButtonText: 'Transferir',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.operationsService.addTransfer(outputOperation, inputOperation);
+        this.operationsService.addTransfer(expenseOperation, incomeOperation);
       }
     });
 

@@ -47,10 +47,10 @@ export class OperationsComponent implements OnInit {
     private usersService: UsersService,
     private operationsService: OperationsService
   ) {
-    this.currentUser = this.usersService.currentUser;
+    this.currentUser = this.usersService.getCurrentUser();
     this.form = this.formBuilder.group({
       amount: [
-        { value: '' },
+        '',
         [
           Validators.required,
           Validators.min(1),
@@ -69,14 +69,16 @@ export class OperationsComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSave(form: any, formDirective: FormGroupDirective): void {
+    /*  console.log(this.form.value); */
+    let id = this.operationsService.getOperationsId();
     let operation: Operation = {
+      id: id,
       userId: this.currentUser.id,
       amount: this.form.value.amount,
       category: this.form.value.category,
       date: this.form.value.date,
       currency: this.form.value.currency,
       type: this.form.value.type,
-      account: this.form.value.account,
     };
 
     this.operationsService.addOperation(operation);
@@ -86,7 +88,6 @@ export class OperationsComponent implements OnInit {
   }
 
   getCurrency() {
-    console.log(this.form.value.currency);
     if (this.form.value.currency == 'ARS') {
       return this.ARS;
     } else {

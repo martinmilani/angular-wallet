@@ -38,11 +38,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatTableModule,
     MatExpansionModule,
     BrowserAnimationsModule,
@@ -77,6 +81,8 @@ import { MatTableModule } from '@angular/material/table';
   ],
   exports: [
     MatIconModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatTableModule,
     MatDialogModule,
     MatExpansionModule,

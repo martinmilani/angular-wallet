@@ -13,12 +13,34 @@ export class UsersService {
   selectedUser: any = {};
   user: any = {};
 
+  initialLocalStorage: User[] = [
+    {
+      id: 1,
+      name: 'User 1',
+      email: 'user1@mail.com',
+      password: '12345',
+      image: 'https://avatars.dicebear.com/api/human/user1.svg',
+    },
+    {
+      id: 2,
+      name: 'User 2',
+      email: 'user2@mail.com',
+      password: '12345',
+      image: 'https://avatars.dicebear.com/api/human/user2.svg',
+    },
+  ];
+
   constructor(private router: Router, public snackBarService: SnackBarService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (!localStorage.getItem('users')) {
+      localStorage.setItem('users', JSON.stringify(this.initialLocalStorage));
+    }
     this.users = JSON.parse(localStorage.getItem('users') || '');
+    /*  */
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '');
+  }
 
   getUsers() {
     this.users = JSON.parse(localStorage.getItem('users') || '');
@@ -37,7 +59,7 @@ export class UsersService {
   }
 
   findUserByEmail(email: string) {
-    console.log(this.users.find((u) => u.email === email));
+    /*    console.log(this.users.find((u) => u.email === email)); */
     if (this.users.find((u) => u.email === email)) {
       return true;
     } else {
